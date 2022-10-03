@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{enumitem}
+\setlistdepth{5}
+\renewlist{enumerate}{enumerate}{5}
+\setlist[enumerate,1]{label=\arabic*}
+\setlist[enumerate,2]{label=\alph*}
+\setlist[enumerate,3]{label=\Alph*}
+\setlist[enumerate,4]{label=\Roman*}
+\setlist[enumerate,5]{label=\roman*}
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage{hulipsum}
+
+\begin{document}
+\ref{l:elso}
+\ref{l:masodik}
+
+\begin{enumerate}
+\item[\textbullet] egy
+\label{l:elso}
+\begin{enumerate}[label=\alph*]
+\item kettő
+\label{l:masodik}
+\begin{enumerate}
+\item három
+\begin{enumerate}
+\item négy
+\begin{enumerate}
+\item öt
+
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\hulipsum[1-4]
+\begin{enumerate}[resume*]
+\item hat
+\end{enumerate}
+
+\end{document}

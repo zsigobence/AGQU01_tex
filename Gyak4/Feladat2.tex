@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage{float}
+\floatstyle{plaintop}
+\newfloat{forraskod}{hbt}{lop}
+\usepackage{hulipsum}
+
+
+\begin{document}
+
+\listof{forraskod}{Forráskódok}
+
+helyezzünk \verb|\texttt{valami}|el szöveggel egy sorba két-három verbatim \verb|\LaTeX| parancsot!
+\\
+\\
+\hulipsum[1]
+
+\begin{forraskod}
+\caption{tetel}
+\label{verb:tetel}
+
+\begin{verbatim}
+\begin{tetel}
+Pitagorasz tétele
+\end{tetel}
+\end{verbatim}
+\end{forraskod}
+
+\hulipsum[2]
+
+\begin{forraskod}
+\caption{lista}
+\label{verb:lista}
+
+\begin{verbatim}
+\begin{itemize}
+  \item első elem
+  \item második elem
+\end{itemize}
+\end{verbatim}
+\end{forraskod}
+
+\hulipsum[3]
+
+\end{document}

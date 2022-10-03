@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\begin{document}
+
+\listofalgorithms
+
+\begin{algorithm}
+\caption{pszeudokód}
+\label{alg:pszeudo}
+\begin{algorithmic}[2]
+\Procedure{feloszt}{@A,a,b,k,@q}
+%\Require A írható tömb
+%\Require 1 ≤ a ≤ b ≤ Hossz[A] indexek
+%\Require k A-beli kulcs
+\State i $\leftarrow$ a-1
+\State j $\leftarrow$ b+1
+\While{i<j}
+\Repeat
+\State i $\leftarrow$ i+1
+\Until{j $\in$ A>=k}
+\Repeat
+\State i $\leftarrow$ j-1
+\Until{j $\in$ A<=k}
+\If{i<j}
+\State j $\in$ A $\leftrightarrow$ i $\in$ A
+\Else
+\State q $\leftarrow$ j
+\State \Return{A,g}
+\EndIf
+\EndWhile
+\EndProcedure
+\Procedure{qsort}{@A,a,b}
+\If{a=b}
+\State \Return{a}
+\Else
+\State \Call{feloszt}{@A,a,b,k,@q}
+\State \Call{qsort}{@A,a,q}
+\State \Call{qsort}{@A,q+1,b}
+\EndIf
+\EndProcedure
+\algstore*{quicksearch}
+\end{algorithmic}
+\end{algorithm}
+
+
+\algblockdefx{Do}{While}{\textbf{Do}}[1]{\textbf{While} #1}
+
+\begin{algorithmic}
+\Do
+\State x $\leftarrow$ 0
+\While{x}
+\end{algorithmic}
+
+
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{array}
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hulipsum}
+
+\begin{document}
+\begin{figure}[t]
+\begin{itemize}
+\item\ref{tab:A}
+\item\ref{tab:B}
+\item\ref{tab:C}
+\end{itemize}
+\end{figure}
+\hulipsum[1-2]
+
+\begin{table}[]
+\centering
+\caption{A}
+\label{tab:A}
+\begin{tabular}{l||lll|}
+                                                                                        & 1  & 2 & 3  \\ \hline \hline
+\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Helló\\ világ!\\ Lórum\\ Ipse\end{tabular}} 
+& 4  & 5 & 6  \\ \cline{2-4}                                                                                       & 7  & 8 & 9  \\ \cline{2-2} \cline{4-4}                                                                              & 10 &   & 12 \\ \hline
+\end{tabular}
+\end{table}
+
+\hulipsum[1-2]
+\begin{table}[]
+\centering
+\caption{B}
+\label{tab:B}
+\begin{tabular}{l|l|l}
+1  & 2  & 3  \\
+\rowcolor[HTML]{FCFF2F} 
+4  & 5  & 6  \\
+\rowcolor[HTML]{CBCEFB} 
+7  & 8  & 9  \\
+\rowcolor[HTML]{FCFF2F} 
+10 & 11 & 12
+\end{tabular}
+\end{table}
+
+\hulipsum[1-2]
+\begin{table}[b]
+\caption{C}
+\label{tab:C}
+\begin{tabular}{l!{\color{red}\vrule}ll|}
+1  & \multicolumn{2}{c|}{2} \\ \hline
+\multirow{2}{*}{4} & \multicolumn{1}{l|}{5}& 6 \\ \cline{2-3} 
+& \multicolumn{2}{c|}{\multirow{2}{*}{8}} \\ \cline{1-1}
+10& \multicolumn{2}{l|}{} \\ \hline
+\end{tabular}
+\end{table}
+
+\end{document}

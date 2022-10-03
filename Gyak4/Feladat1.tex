@@ -1,0 +1,59 @@
+\documentclass{article}
+
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage{amsthm}
+
+
+\newtheorem*{megj}{Megjegyzés}
+\theoremstyle{plain}
+\newtheorem{tet}{Tétel}
+\newtheorem{lemma}[tet]{Lemma}
+\theoremstyle{definition}
+\newtheorem{defin}{Definíció}
+\theoremstyle{remark}
+\newtheorem{fel}{Feladat}[section]
+
+
+\begin{document}
+\section{Első}
+\begin{tet}[Pitagorasz]
+\[a^{2} +b^{2} = c^{2}\]
+\end{tet}
+
+\begin{proof}
+bizonyítás
+\end{proof}
+
+\begin{fel}
+Feladat1
+\end{fel}
+
+\begin{defin}
+A leghosszabb oldalának a négyzete egyenlő a másik két oldal négyzetének összegével.
+\end{defin}
+
+\begin{fel}
+Feladat
+\end{fel}
+
+\begin{tet}
+Két nemnegatív szám mértani közepének a két szám szorzatának négyzetgyökét nevezzük.
+\end{tet}
+\begin{lemma}
+ez egy Lemma
+\end{lemma}
+\section{Második}
+\begin{defin}
+A mértani közepet szokás geometria középnek is nevezni, és “G” betűvel jelölni.
+\end{defin}
+
+\begin{fel}
+Feladat3
+\end{fel}
+
+\begin{megj}
+Megjegyzés
+\end{megj}
+
+\end{document}
