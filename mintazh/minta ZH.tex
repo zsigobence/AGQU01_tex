@@ -1,0 +1,225 @@
+\documentclass[twocolumn]{report}
+
+%%%magyar nyelvi beállításoks
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\frenchspacing
+
+%%%zagyva szöveg
+\usepackage{hulipsum}
+
+%%%fejléc, lábléc
+\usepackage{fancyhdr}
+%fancy oldalstílus beállítása
+\fancyhead[R]{\thepage}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyfoot[C]{Minta ZH}
+%plain oldalstílus újadefiniálása
+\fancypagestyle{plain}{%
+\fancyhf{}% %minden mező törlése
+\fancyhead[R]{\thepage}}
+
+%%%táblázathoz
+\usepackage{array} %kód beszúrása az oszlophoz
+\usepackage[table]{xcolor} %színezés
+\usepackage{multirow} %cellák összevonása
+
+%%matematika
+\usepackage{amsmath} %%mindig jó ötlet
+\usepackage{mathtools} %%pmatrix-hoz
+\usepackage{amsfonts} %%\mathbb-hez
+\usepackage{amsthm} %%tételekhez
+\theoremstyle{definition} %%stílus: vastag betűs cím,  \normalfont törzs. az ez után kiadott \newtheorem parancsokra érvényes, amíg nem írjuk felül
+\newtheorem{tet}{Tétel}
+\newtheorem{defin}{Definíció} %%def-nek rövidebb lenne, de nem szerencsés, mert \def belső kulcsszó
+%% nem varázsoltunk számlálókkal, mert a példában is egymástól és chapter-től is függetlenül számozódtak
+
+%%pszeudokód
+\usepackage{algpseudocode} %%kód írása
+\usepackage{algorithm} %%úsztatás
+\floatname{algorithm}{Algoritmus} %%átnevezés, magyarítás
+
+%%programozás
+%% \centerpair parancs, 2 kötelező argumentummal
+\newcommand{\centerpair}[2]{%
+\par\noindent% %%egész sor kell nekünk
+\begin{minipage}[t]{0.48\linewidth}% %%bal oldali doboz, fél* oldalszélesség, függőlegesen felülre igazítva
+%%kevesebb, mint fél, hogy középen ne folyjon össze a szöveg!
+\begin{flushright}% %%jobbra zárás
+#1% %%argumentum beillesztése
+\end{flushright}%
+\end{minipage}%
+\hfill\vline\hfill% %% középvonal és az extra hely kitöltése körülötte középen -- enélkül is teljesítettük a feladatot
+\begin{minipage}[t]{0.48\linewidth}%
+\begin{flushleft}% %%balra zárás -- fölösleges, mert alapértelmezett
+#2%
+\end{flushleft}%
+\end{minipage}%
+\par}
+
+\begin{document}
+%%%oldalstílus
+\pagestyle{fancy}
+
+%%%címsor
+\title{Zárthelyi dolgozat\\\Large Minta ZH}
+\author{Vadon Viktória XXXXXX}
+\date{\today}
+\maketitle
+
+\chapter{Oldalbeállítás}
+
+\section{Első szakasz}
+
+\hulipsum[1-12]
+
+\section{Második szakasz}
+
+\hulipsum[13-24]
+
+\chapter{Táblázat}
+
+\hulipsum[1-3]
+
+%% >{oszlop elé beszúrandó kód}r
+%% \columncolor{green%30}: green 30%, white 70%
+%% N/A cellákhoz külön fehér háttérszín \cellcolor-ral
+%% tartsuk fejben, hogy a multicolumn és multirow szintaxisa különbözik!
+%% \multicolumn{oszlopszám}{igazítás}{tartalom}
+%% \multirow{sorok száma}{szélesség}{tartalom}
+%%	 ``sorok száma'' nem feltétlen egész szám, csak egy dobozmagasság, normál sormagasság hányszorosa
+%%	 *-gal automatikus szélesség, de nem tördel
+
+\begin{table*} %% bármely float *-os verziója mindkét hasábot kitölti kéthasábos dokumentumban, és oldal tetejére kerül
+\caption{Egy vállalati kimutatás}
+\begin{center} %% csak hogy szebb legyen
+\begin{tabular}{c|c|>{\columncolor{green!30}}r>{\columncolor{red!30}}r>{\columncolor{yellow!30}}r}
+év & ágazat & bevétel & kiadás & nettó bevétel \\ \hline
+\multirow{4}{*}{2020} & marketing & xx & xx & xx \\
+ & humán erőforrás & \multicolumn{3}{c}{N/A} \\
+ & logisztika & xx & xx & xx \\
+ & gyártás & xx & xx & xx \\ \hline
+\multirow{4}{*}{2021} & marketing & \cellcolor{white}N/A & xx & \cellcolor{white}N/A \\
+ & humán erőforrás & xx & xx & xx \\
+ & logisztika & xx & xx & xx \\
+ & gyártás & xx & \multicolumn{2}{c}{N/A}
+\end{tabular}
+\end{center}
+\end{table*}
+
+\hulipsum
+
+\chapter{Matematika}
+
+\begin{defin}[Mátrix szorzás] %% [] arguentum: definíció neve, ami a ()-ben jelenik meg
+%% érdemes a szöveg másolni a pdf-ből
+%% sőt, formulákhoz érdemes másolás-beillesztéssel újrahasznosítani kódrészleteket -- vagy akár saját parancsokat bevezetni, mint \newcommand{\redn}{\textcolor{red}{n}}
+Legyenek $m,\textcolor{red}{n},r \in \mathbb{Z}^+$, $A \in\mathbb{R}^{m\times \textcolor{red}{n}}$, és $B\in\mathbb{R}^{\textcolor{red}{n}\times r}$. Bontsuk fel $A$-t sorvektoraival, B-t pedig oszlopevektoraival:
+\begin{equation} %%egyenlet: számozott, egysoros matematikai mód
+A = \begin{pmatrix} %%mátrix kerek zárójellel
+a_1^T \\
+%% a mátrix is array-re épül -- \cellcolor és társai használhatók benne
+\cellcolor{red!30}\hphantom{a_2^T} a_2^T \hphantom{a_2^T}\\ 
+%%\hphantom: láthatatlan szöveg -- vizuális trükk, ezzel szélesítjük ki a sort és a színezést
+\vdots \\
+a_m^T 
+%% utolsó sor után nem kell \\
+\end{pmatrix}, 
+\quad %% térköz
+B = \begin{pmatrix}
+%% egyetlen sor kell, de üres cellákból megcsinálunk plusz fél-fél sort előtte és utána a beszínezéshez
+%%	 A-ben is csinálhattuk volna ugyanezt, plusz üres oszlopok -- azaz plusz üres cellák minden sorban 
+ & \cellcolor{blue!30} \\
+b_1 & \cellcolor{blue!30} b_2 & \cdots & b_r  \\
+ & \cellcolor{blue!30} \\
+\end{pmatrix}.
+\end{equation}
+{\color{gray} Ha nem csalunk láthatatlan dolgokkal, a következőképp nézne ki a két mátrix -- szintén helyes megoldás, csak vizuálisan vektornak látszanak.
+\[ A = \begin{pmatrix}
+a_1^T \\
+\cellcolor{red!30} a_2^T \\ 
+\vdots \\
+a_m^T 
+\end{pmatrix}, 
+\quad 
+B = \begin{pmatrix}
+b_1 & \cellcolor{blue!30} b_2 & \cdots & b_r 
+\end{pmatrix}. \]
+}
+Mind $a_i$, mind $b_j \in \mathbb{R}^{\textcolor{red}{n}}$, így az $a_i^T b_j$ skalár szorzat létezik. 
+Az $A \cdot B$ mátrix szorzatot a következőképpen definiáljuk:
+\begin{equation}
+A \cdot B := \begin{pmatrix}
+a_1^T b_1 & \cellcolor{blue!15}a_1^T b_2 & \cdots & a_1^T b_r \\
+\rowcolor{red!15} a_2^T b_1 & \cellcolor{purple!30}a_2^T b_2 & \cdots & a_2^T b_r \\
+\vdots & \cellcolor{blue!15}\vdots & \ddots & \vdots \\
+a_m^T b_1 & \cellcolor{blue!15}a_m^T b_2 & \cdots & a_m^T b_r 
+\end{pmatrix}
+\in \mathbb{R}^{m \times r}
+\end{equation}
+\end{defin}
+
+\begin{tet}[Mátrix szorzás tulajdonságai]
+A mátrix szorzás asszociatív, de nem kommutatív művelet.
+\end{tet}
+
+\begin{tet}[Mátrix szorzat determinánsa]
+Ha $A,b\in \mathbb{R}^{n\times n}$ négyzetes mátrixok,
+akkor
+\begin{equation}
+%% \det beépített függvény
+\det(A\cdot B) = \det(A) \cdot \det(B).
+\end{equation}
+\end{tet}
+
+\chapter{Pszeudokód}
+
+\hulipsum[1]
+
+\begin{algorithm} %%csak az úszó környezet
+\caption{Lineáris keresés}
+\begin{algorithmic}[3] %%környezet kód írására -- vigyázzunk, nem is hasonlít a csomag nevére
+%% opcionális argumentum: hány soronként számozzon
+\Procedure{linsearch}{A,ertek,@index}
+\Require A tömb, ertek a keresett érték
+\Ensure index (az első) A-beli index, hogy $A_i$ = ertek, vagy érvénytelen (0)
+\State i $\gets$ 1 %%ne felejtsük el a \State parancsokat -- ők gondoskodnak a megfelelő behúzásról a blokkokban!
+%% beépített \and parancs nincs kézzel vastagítjuk
+\While{$A_i \neq$ ertek \textbf{and} i < Hossz[A]}
+\State \Call{inc}{i} %%függvényhívás -- \Function parancs függvényblokkot kezd!
+\EndWhile %% ne felejtkezünk el az \End... parancsokról sem!
+\If{i < Hossz[A]}
+\State index $\gets$ i
+\Else
+\State index $\gets$ 0
+\EndIf
+\State \Return index
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\hulipsum
+
+\chapter{Programozás}
+
+szöveg előtte... nem teszünk új bekezdést, hogy lássuk, a parancs gondoskodik róla!
+\centerpair{bal}{jobb}
+szintén új bekezdés nélkül írunk, de automatikusan új bekezdésben (kéne) lennünk
+
+\centerpair{na még egyszer használjuk...}{teszteljük a parancsunkat egy kicsivel hosszabb szövegekkel is\par ez egy új bekezdés. láthatjuk a tördelést és a felülre igazítást is!}
+
+\chapter{Ciklus -- bónusz feladat}
+
+\newcounter{index} %%0-ra incializál, ez jó lesz induláshoz
+\newcounter{hatvany}
+\setcounter{hatvany}{1} %%2^0 = 1
+\whiledo{\value{index}<21}% %%\value: érték lelkérdezése számláló változóként való használatához -- fontos, különben hibát dob az összehasonlítás!
+{% %%ciklusmag
+\theindex:~\thehatvany\\% %%kiíratás és új sor
+%%léptetés:
+\stepcounter{index}% %%index++
+\setcounter{hatvany}{\numexpr 2*\value{hatvany}\relax}%
+%%\numexpr + \relax: ha számolni kell a kifejezést, amit étékül akarunk adni, tegyük ezek közé
+}
+
+\end{document}
